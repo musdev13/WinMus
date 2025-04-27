@@ -57,6 +57,46 @@ void RemoveGroup(std::vector<Group>* groups){
     }
 }
 
+void SortFiles(fs::path* root, std::vector<Group>* groups) {
+    if (!fs::exists(*root) || !fs::is_directory(*root)) {
+        std::cerr << "Path does not exist or is not a directory\n";
+        return;
+    }
+
+    for (const auto& group : *groups) {
+        fs::path groupPath = *root / group.name;
+        if (!fs::exists(groupPath)) {
+            fs::create_directory(groupPath);
+        }
+
+        for (const auto& entry : fs::directory_iterator(*root)) {
+            if (entry.is_regular_file()) {
+                fs::path filePath = entry.path();
+                std::string fileExt = filePath.extension().string();
+
+                if (!fileExt.empty() && fileExt[0] == '.') {
+                    fileExt = fileExt.substr(1);
+                }
+
+                for (const auto& ext : group.ext) {
+                    if (fileExt == ext) {
+                        fs::path destPath = groupPath / filePath.filename();
+
+                        try {
+                            fs::rename(filePath, destPath);
+                            std::cout << "Moved file " << filePath.filename() << " to " << group.name << "\n";
+                        }
+                        catch (const fs::filesystem_error& e) {
+                            std::cerr << "Error moving file " << filePath << ": " << e.what() << "\n";
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
+
 void sortFilesMenu(fs::path* root){
     bool running = true;
     std::vector<Group> groups;
@@ -75,6 +115,7 @@ void sortFilesMenu(fs::path* root){
         else if (ch == "2") AddGroup(&groups);
         else if (ch == "3") ListGroups(groups);
         else if (ch == "4") RemoveGroup(&groups);
+        else if (ch == "5") SortFiles(root,&groups);
         else if (ch == "x") running = false;
     }
     
@@ -90,5 +131,5 @@ void sortFilesUTIL(){
     //     printf("%s - %s - %s\n", l.path().filename().string().c_str(), (l.is_directory() ? "Dir":"File"), l.path().extension().string().c_str());
     // }
     sortFilesMenu(&root);
-    system("pause");
+    // system("pause");
 }
