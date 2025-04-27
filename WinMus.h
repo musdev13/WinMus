@@ -11,5 +11,6 @@
 void sortFilesUTIL();
 void InstallSoftwareMenu();
 void chocoMenu();
+void deleteTempFiles();
 
 #endif

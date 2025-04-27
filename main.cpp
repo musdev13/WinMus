@@ -15,7 +15,8 @@ void ResizeConsole() {
 void printMenu() {
     const char* items[] = {
         "Sort Files",
-        "Install Software"
+        "Install Software",
+        "Delete Temp Files"
     };
     const int size = sizeof(items) / sizeof(items[0]);
 
@@ -34,6 +35,7 @@ void selectChoice(bool* running){
     if (ch == "x") exit(0);
     else if (ch == "1") sortFilesUTIL();
     else if (ch == "2") InstallSoftwareMenu();
+    else if (ch == "3") deleteTempFiles();
 }
 
 int main(){
