@@ -15,7 +15,14 @@ bool ChoicePackageManager(){
     }
 }
 
+void wingetMenu(){
+    system("cls");
+    printf("i didn't make this at this moment\n");
+    system("pause");
+}
+
 void InstallSoftwareMenu(){
     bool pckgm = ChoicePackageManager();
     if (pckgm) chocoMenu();
+    else wingetMenu();
 }
