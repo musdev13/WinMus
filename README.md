@@ -1,5 +1,5 @@
 # WinMus
-WinMus is the utility to make some basic stuff easily
+WinMus is the utility to make some basic stuff easily, and it's so useless.
 
 It's **NOT** ready. I just started to code this stuff, and **all of my code is just a big joke**.
 
