@@ -16,11 +16,11 @@ void ResizeConsole() {
 
 int printMenu(int selected, bool ret) {
     const char* items[] = {
-        "Some",
+        "Sort Files",
         "exit",
     };
 
-    int size = sizeof(items) / sizeof(items[0]);
+    const int size = sizeof(items) / sizeof(items[0]);
 
     if (ret) return size;
 
@@ -60,14 +60,9 @@ void selectChoice(int* select, bool* running){
 }
 
 void useThis(int select, bool* running){
-    switch (select)
-    {
-    case 1:
+    const int last = printMenu(select, true)-1;
+    if (select == last) {
         exit(0);
-        break;
-    
-    default:
-        break;
     }
 }
 
