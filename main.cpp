@@ -1,6 +1,4 @@
-#include <iostream>
-#include <windows.h>
-#include <conio.h>
+#include "WinMus.h"
 
 void ResizeConsole() {
     HWND hwnd = GetConsoleWindow();
@@ -64,9 +62,13 @@ void useThis(int select, bool* running){
     if (select == last) {
         exit(0);
     }
+    else if (select == 0) {
+        sortFilesUTIL();
+    }
 }
 
 int main(){
+    SetConsoleOutputCP(CP_UTF8);
     ResizeConsole();
 
     bool running = true;
