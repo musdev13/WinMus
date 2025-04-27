@@ -1,5 +1,6 @@
-main.exe
+*.exe
 .vscode
 test
 *.o
 wmsort
+*.un\~

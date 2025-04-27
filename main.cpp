@@ -40,6 +40,7 @@ void selectChoice(bool* running){
 
 int main(){
     SetConsoleOutputCP(CP_UTF8);
+    system("title WinMus");
     ResizeConsole();
 
     bool running = true;
