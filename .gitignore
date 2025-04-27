@@ -1,3 +1,5 @@
 main.exe
 .vscode
 test
+*.o
+wmsort
