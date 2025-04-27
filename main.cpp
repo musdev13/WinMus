@@ -12,59 +12,26 @@ void ResizeConsole() {
     }
 }
 
-int printMenu(int selected, bool ret) {
+void printMenu() {
     const char* items[] = {
         "Sort Files",
-        "exit",
     };
-
     const int size = sizeof(items) / sizeof(items[0]);
-
-    if (ret) return size;
 
     printf("┌──────────────────────────┐\n");
     printf("│     WinMus by Mus :3     │\n");
     printf("└──────────────────────────┘\n\n");
 
     for (int i = 0; i < size; i++)
-    {
-        if (i == selected) printf("\u2192 %s\n", items[i]);
-        else printf("  %s\n", items[i]);
-    }
-    printf("\n\u2191/\u2193 | Enter: \n");
-    return 0;
+        printf("%d. %s\n", i+1, items[i]);
+    printf("\nx. Exit\n");
+    printf("Choice(1-9): ");
 }
 
-void useThis(int select, bool* running);
-
-void selectChoice(int* select, bool* running){
-    int ch = _getch();
-    switch (ch)
-    {
-    case 72:
-        if (*select > 0) (*select)--;
-        break;
-    case 80:
-        if (*select < printMenu(*select, true)-1) (*select)++;
-        break;
-
-    case 13:
-        useThis(*select, running);
-        break;
-    
-    default:
-        break;
-    }
-}
-
-void useThis(int select, bool* running){
-    const int last = printMenu(select, true)-1;
-    if (select == last) {
-        exit(0);
-    }
-    else if (select == 0) {
-        sortFilesUTIL();
-    }
+void selectChoice(bool* running){
+    std::string ch; std::cin >> ch;
+    if (ch == "x") exit(0);
+    else if (ch == "1") sortFilesUTIL();
 }
 
 int main(){
@@ -72,12 +39,11 @@ int main(){
     ResizeConsole();
 
     bool running = true;
-    int select = 0;
     while (running)
     {
         system("cls");
-        printMenu(select, false);
-        selectChoice(&select, &running);
+        printMenu();
+        selectChoice(&running);
     }
     system("pause");
     return 0;
